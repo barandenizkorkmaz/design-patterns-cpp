@@ -1,60 +1,29 @@
 #include <iostream>
-#include <string>
-#include <vector>
+#include "HTMLElement.h"
+#include "HTMLBuilder.h"
+
 using namespace std;
 
-struct HTMLElement {
-    string name;
-    string text;
-    vector<HTMLElement> elements;
-    const size_t indent_size = 2;
-
-    HTMLElement() = default;
-    HTMLElement(const string& name, const string& text) : name(name), text(text) {}
-
-    string str(int indent = 0) const {
-        string i(indent_size * indent, ' ');
-        string result = i + "<" + name + ">\n";
-        if (text.size() > 0) {
-            result += string(indent_size * (indent + 1), ' ') + text + "\n";
-        }
-
-        for (const auto& e : elements) {
-            result += e.str(indent + 1);
-        }
-
-        result += i + "</" + name + ">\n";
-        return result;
-    }
-};
-
-struct HTMLBuilder {
-    HTMLElement root;
-
-    HTMLBuilder(const string& root_name) {
-        root.name = root_name;
-    }
-
-    HTMLBuilder& add_child(const string& child_name, const string& child_text) {
-        root.elements.emplace_back(child_name, child_text);
-        return *this;
-    }
-
-    string str() const {
-        return root.str();
-    }
-};
-
 int main() {
-    // Before fluent builder
+    // Approach 1: Traditional builder usage
+    cout << "=== Approach 1: Traditional Builder ===" << endl;
     HTMLBuilder builder("ul");
     builder.add_child("li", "Hello");
     builder.add_child("li", "World");
     cout << builder.str() << endl;
 
-    // After fluent builder
-    HTMLBuilder fluent_builder("ul");
+    // Approach 2: Fluent interface (method chaining)
+    cout << "=== Approach 2: Fluent Interface ===" << endl;
+    HTMLBuilder fluent_builder{"ul"};
     fluent_builder.add_child("li", "hello").add_child("li", "world");
     cout << fluent_builder.str() << endl;
+
+    // Approach 3: Using static factory method with fluent interface
+    cout << "=== Approach 3: Static Factory + Fluent ===" << endl;
+    auto static_builder = HTMLElement::build("ul")
+        .add_child("li", "First")
+        .add_child("li", "Second");
+    cout << static_builder.str() << endl;
+
     return 0;
-};
+}
