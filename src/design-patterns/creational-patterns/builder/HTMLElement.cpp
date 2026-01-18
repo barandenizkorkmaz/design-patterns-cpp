@@ -20,6 +20,6 @@ std::string HTMLElement::str(int indent) const {
     return result;
 }
 
-HTMLBuilder HTMLElement::build(const std::string& root_name) {
+HTMLBuilder HTMLElement::builder(const std::string& root_name) {
     return HTMLBuilder{root_name};
 }

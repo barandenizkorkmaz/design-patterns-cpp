@@ -20,9 +20,10 @@ int main() {
 
     // Approach 3: Using static factory method with fluent interface
     cout << "=== Approach 3: Static Factory + Fluent ===" << endl;
-    HTMLElement static_builder = HTMLElement::build("ul")
+    HTMLElement static_builder = HTMLElement::builder("ul")
         .add_child("li", "First")
-        .add_child("li", "Second");
+        .add_child("li", "Second")
+        .build();
     cout << static_builder.str() << endl;
 
     return 0;

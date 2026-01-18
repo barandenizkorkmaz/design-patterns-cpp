@@ -23,5 +23,5 @@ public:
     std::string str(int indent = 0) const;
 
     // Static factory method that returns a builder
-    static HTMLBuilder build(const std::string& root_name);
+    static HTMLBuilder builder(const std::string& root_name);
 };

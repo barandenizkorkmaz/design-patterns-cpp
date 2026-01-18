@@ -14,6 +14,5 @@ public:
 
     std::string str() const;
 
-    // Conversion operator: allows implicit conversion from HTMLBuilder to HTMLElement
-    operator HTMLElement() const;
+    HTMLElement build();
 };

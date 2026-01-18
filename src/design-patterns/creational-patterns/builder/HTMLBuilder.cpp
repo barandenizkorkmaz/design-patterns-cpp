@@ -13,6 +13,7 @@ std::string HTMLBuilder::str() const {
     return root.str();
 }
 
-HTMLBuilder::operator HTMLElement() const {
+HTMLElement HTMLBuilder::build()
+{
     return root;
 }
