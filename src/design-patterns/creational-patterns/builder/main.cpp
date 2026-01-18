@@ -35,8 +35,9 @@ struct HTMLBuilder {
         root.name = root_name;
     }
 
-    void add_child(const string& child_name, const string& child_text) {
+    HTMLBuilder& add_child(const string& child_name, const string& child_text) {
         root.elements.emplace_back(child_name, child_text);
+        return *this;
     }
 
     string str() const {
@@ -45,9 +46,15 @@ struct HTMLBuilder {
 };
 
 int main() {
+    // Before fluent builder
     HTMLBuilder builder("ul");
     builder.add_child("li", "Hello");
     builder.add_child("li", "World");
     cout << builder.str() << endl;
+
+    // After fluent builder
+    HTMLBuilder fluent_builder("ul");
+    fluent_builder.add_child("li", "hello").add_child("li", "world");
+    cout << fluent_builder.str() << endl;
     return 0;
 };
