@@ -12,3 +12,7 @@ HTMLBuilder& HTMLBuilder::add_child(const std::string& child_name, const std::st
 std::string HTMLBuilder::str() const {
     return root.str();
 }
+
+HTMLBuilder::operator HTMLElement() const {
+    return root;
+}
